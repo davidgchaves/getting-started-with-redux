@@ -58,4 +58,28 @@ describe("Todos reducer", () => {
     });
   });
 
+  context("when an unknown action is dispatched", () => {
+    const unknownAction = {
+      type: 'WHATEVER'
+    };
+
+    deepFreeze(unknownAction);
+
+    it("return the current state", () => {
+      const stateBefore = [
+        {
+          id: 0,
+          text: 'Have fun with Redux',
+          completed: false
+        }
+      ];
+
+      deepFreeze(stateBefore);
+
+      expect(
+        todos(stateBefore, unknownAction)
+      ).to.be.eql(stateBefore);
+    });
+  });
+
 });
