@@ -1,4 +1,4 @@
-const todos = (prevState, action) => {
+const todos = (prevState = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
@@ -9,6 +9,9 @@ const todos = (prevState, action) => {
           completed: false
         }
       ];
+
+    default:
+      return prevState;
   }
 };
 

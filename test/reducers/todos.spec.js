@@ -43,4 +43,19 @@ describe("Todos reducer", () => {
     });
   });
 
+  context("when receiving an undefined state", () => {
+    const undefinedState = undefined;
+
+    it("returns the initial state", () => {
+      const whateverAction = {};
+      const initialState = [];
+
+      deepFreeze(whateverAction);
+
+      expect(
+        todos(undefinedState, whateverAction)
+      ).to.be.eql(initialState);
+    });
+  });
+
 });
