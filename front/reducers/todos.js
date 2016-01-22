@@ -9,7 +9,12 @@ const todos = (prevState = [], action) => {
           completed: false
         }
       ];
-
+    case 'TOGGLE_TODO':
+      return prevState.map(todo => {
+        return (todo.id !== action.id)
+          ? todo
+          : { ...todo, completed: !todo.completed };
+      });
     default:
       return prevState;
   }

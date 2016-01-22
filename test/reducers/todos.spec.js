@@ -43,6 +43,49 @@ describe("Todos reducer", () => {
     });
   });
 
+  context("when a 'TOGGLE_TODO' action is dispatched", () => {
+    const toggleTodoAction = {
+      type: 'TOGGLE_TODO',
+      id: 1
+    };
+
+    deepFreeze(toggleTodoAction);
+
+    it("toggles the completed field from selected todo", () => {
+      const stateBefore = [
+        {
+          id: 0,
+          text: 'Have fun with Redux',
+          completed: false
+        },
+        {
+          id: 1,
+          text: 'Watch more movies',
+          completed: false
+        }
+      ];
+
+      const stateAfter = [
+        {
+          id: 0,
+          text: 'Have fun with Redux',
+          completed: false
+        },
+        {
+          id: 1,
+          text: 'Watch more movies',
+          completed: true
+        }
+      ];
+
+      deepFreeze(stateBefore);
+
+      expect(
+        todos(stateBefore, toggleTodoAction)
+      ).to.be.eql(stateAfter);
+    });
+  });
+
   context("when receiving an undefined state", () => {
     const undefinedState = undefined;
 
