@@ -5,13 +5,13 @@ import todos from 'reducers/todos';
 describe("Todos reducer", () => {
 
   context("when an 'ADD_TODO' action is dispatched", () => {
-    const action = {
+    const addTodoAction = {
       type: 'ADD_TODO',
       id: 1,
       text: 'Watch more movies'
     };
 
-    deepFreeze(action);
+    deepFreeze(addTodoAction);
 
     it("adds a new todo", () => {
       const stateBefore = [
@@ -38,7 +38,7 @@ describe("Todos reducer", () => {
       deepFreeze(stateBefore);
 
       expect(
-        todos(stateBefore, action)
+        todos(stateBefore, addTodoAction)
       ).to.be.eql(stateAfter);
     });
   });
