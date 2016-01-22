@@ -48,6 +48,30 @@ describe("TodoApp reducer", () => {
     });
   });
 
+  context("when dispatching a visibility filter related action", () => {
+    const visibilityFilterRelatedAction = {
+      type: 'SET_VISIBILITY_FILTER',
+      filter: 'SHOW_COMPLETED'
+    };
+    deepFreeze(visibilityFilterRelatedAction);
+
+    it("delegates to the VisibilityFilter reducer", () => {
+      const stateBefore = {
+        visibilityFilter: 'SHOW_ALL',
+        todos: []
+      };
+      const stateAfter = {
+        visibilityFilter: 'SHOW_COMPLETED',
+        todos: []
+      };
+      deepFreeze(stateBefore);
+
+      expect(
+        todoApp(stateBefore, visibilityFilterRelatedAction)
+      ).to.be.eql(stateAfter);
+    });
+  });
+
   context("when receiving an undefined state", () => {
     const undefinedState = undefined;
 
@@ -55,7 +79,7 @@ describe("TodoApp reducer", () => {
       const whateverAction = {};
       const initialState = {
         todos: [],
-        visibilityFilter: undefined
+        visibilityFilter: 'SHOW_ALL'
       };
 
       deepFreeze(whateverAction);

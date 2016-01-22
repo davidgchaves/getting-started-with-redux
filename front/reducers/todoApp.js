@@ -4,7 +4,7 @@ import visibilityFilter from 'reducers/visibilityFilter';
 const todoApp = (prevState = {}, action) => {
   return {
     todos: todos(prevState.todos, action),
-    visibilityFilter: prevState.visibilityFilter
+    visibilityFilter: visibilityFilter(prevState.visibilityFilter, action)
   };
 };
 
