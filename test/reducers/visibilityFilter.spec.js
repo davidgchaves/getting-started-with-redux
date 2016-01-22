@@ -38,4 +38,20 @@ describe("VisibilityFilter reducer", () => {
     });
   });
 
+  context("when an unknown action is dispatched", () => {
+    const unknownAction = {
+      type: 'WHATEVER'
+    };
+
+    deepFreeze(unknownAction);
+
+    it("return the current state", () => {
+      const stateBefore = 'STATE_BEFORE';
+      deepFreeze(stateBefore);
+
+      expect(
+        visibilityFilter(stateBefore, unknownAction)
+      ).to.be.eql(stateBefore);
+    });
+  });
 });
