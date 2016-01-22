@@ -1,0 +1,52 @@
+{
+  "name": "redux-todo-app",
+  "version": "0.0.1",
+  "description": "My take on a Todo app using Redux following Dan Abramov's advice in (https://egghead.io/series/getting-started-with-redux)",
+  "author": "David G. Chaves <davidgchaves@gmail.com>",
+  "license": "ISC",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --port 3000 --devtool eval --progress --colors --hot --content-base dist",
+    "prebuild": "rm -rf dist",
+    "predev": "rm -rf dist",
+    "test_with_karma": "karma start karma.config.js",
+    "test_with_karma:watch": "npm run test_with_karma -- --watch",
+    "test_with_mocha": "mocha --compilers js:babel-register --recursive",
+    "test_with_mocha:watch": "npm test -- --watch",
+    "test": "npm run test_with_karma",
+    "test:watch": "npm run test_with_karma:watch"
+  },
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-register": "^6.4.3",
+    "chai": "^3.4.1",
+    "deep-freeze": "0.0.1",
+    "enzyme": "^1.3.1",
+    "file-loader": "^0.8.5",
+    "karma": "^0.13.19",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.1",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.23",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.3.4",
+    "phantomjs": "^1.9.19",
+    "phantomjs-polyfill": "0.0.1",
+    "react-addons-test-utils": "^0.14.6",
+    "sinon": "^1.17.2",
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1",
+    "yargs": "^3.32.0"
+  },
+  "dependencies": {
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.5"
+  }
+}
