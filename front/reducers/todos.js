@@ -3,20 +3,27 @@ const todos = (prevState = [], action) => {
     case 'ADD_TODO':
       return [
         ...prevState,
-        {
-          id: action.id,
-          text: action.text,
-          completed: false
-        }
+        todo(undefined, action)
       ];
     case 'TOGGLE_TODO':
-      return prevState.map(todo => {
-        return (todo.id !== action.id)
-          ? todo
-          : { ...todo, completed: !todo.completed };
-      });
+      return prevState.map(t => todo(t, action));
     default:
       return prevState;
+  }
+};
+
+const todo = (prevState, action) => {
+  switch(action.type) {
+    case 'ADD_TODO':
+      return {
+        id: action.id,
+        text: action.text,
+        completed: false
+      }
+    case 'TOGGLE_TODO':
+      return (prevState.id !== action.id)
+        ? prevState
+        : { ...prevState, completed: !prevState.completed };
   }
 };
 
