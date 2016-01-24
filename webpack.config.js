@@ -3,7 +3,7 @@ var webpack = require('webpack'),
 
 var config = {
   entry: [
-    './front/main.js',
+    './front/main.jsx',
     './front/index.html',
     'webpack/hot/dev-server',
     'webpack-dev-server/client?http://localhost:3000'
