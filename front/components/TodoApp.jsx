@@ -2,46 +2,11 @@ import React, { Component } from 'react';
 import { Provider }         from 'react-redux';
 
 import TodoList from './presentational/TodoList.jsx';
-import Link from './presentational/Link.jsx';
 import Footer from './presentational/Footer.jsx';
 
 /*
  * CONTAINER COMPONENTS
  */
-class FilterLink extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-
-    return (
-      <Link
-        active={props.filter === state.visibilityFilter}
-        onClick={() =>
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter: props.filter
-          })
-        }
-      >
-        {props.children}
-      </Link>
-    );
-  }
-}
-FilterLink.contextTypes = {
-  store: React.PropTypes.object
-};
-
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
@@ -126,4 +91,4 @@ AddTodo.contextTypes = {
  * END COMPONENTS
  */
 
-export { TodoApp, FilterLink };
+export default TodoApp;
