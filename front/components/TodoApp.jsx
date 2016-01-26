@@ -3,30 +3,7 @@ import { Provider }         from 'react-redux';
 
 import TodoList from './presentational/TodoList.jsx';
 import Link from './presentational/Link.jsx';
-
-/*
- * PRESENTATIONAL COMPONENTS
- */
-const Footer = () => (
-  <p>
-    Show:
-    {' '}
-    <FilterLink filter='SHOW_ALL'>
-      All
-    </FilterLink>
-    {' '}
-    <FilterLink filter='SHOW_ACTIVE'>
-      Active
-    </FilterLink>
-    {' '}
-    <FilterLink filter='SHOW_COMPLETED'>
-      Completed
-    </FilterLink>
-  </p>
-);
-/*
- * END PRESENTATIONAL COMPONENTS
- */
+import Footer from './presentational/Footer.jsx';
 
 /*
  * CONTAINER COMPONENTS
@@ -149,4 +126,4 @@ AddTodo.contextTypes = {
  * END COMPONENTS
  */
 
-export default TodoApp;
+export { TodoApp, FilterLink };
