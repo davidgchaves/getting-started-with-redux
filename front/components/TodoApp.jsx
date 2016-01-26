@@ -25,22 +25,6 @@ const TodoList = ({ todos, onTodoClick }) => (
   </ul>
 );
 
-const AddTodo = ({ onAddClick }) => {
-  let input;
-  return (
-    <div>
-      <input ref={node => { input = node; }}></input>
-
-      <button onClick={() => {
-        onAddClick(input.value);
-        input.value = '';
-      }}>
-        Add Todo
-      </button>
-    </div>
-  );
-};
-
 const Link = ({ active, children, onClick }) => {
   const renderAsText = <span>{children}</span>;
   const renderAsLink = (
@@ -149,18 +133,30 @@ class VisibleTodoList extends Component {
   }
 }
 
-let nextTodoId = 0;
-const TodoApp = ({ todos, visibilityFilter }) => (
-  <div>
-    <AddTodo
-      onAddClick={text =>
+const AddTodo = () => {
+  let input;
+
+  return (
+    <div>
+      <input ref={node => { input = node; }}></input>
+      <button onClick={() => {
         store.dispatch({
           type: 'ADD_TODO',
           id: nextTodoId++,
-          text
+          text: input.value
         })
-      }
-    />
+        input.value = '';
+      }}>
+        Add Todo
+      </button>
+    </div>
+  );
+};
+
+let nextTodoId = 0;
+const TodoApp = ({ todos, visibilityFilter }) => (
+  <div>
+    <AddTodo />
     <VisibleTodoList />
     <Footer />
   </div>
