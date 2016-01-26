@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store from '../store';
+//import store from '../store';
 
 /*
  * PRESENTATIONAL COMPONENTS
@@ -42,30 +42,22 @@ const Link = ({ active, children, onClick }) => {
   return active ? renderAsText : renderAsLink;
 };
 
-const Footer = () => (
+const Footer = ({ store }) => (
   <p>
     Show:
     {' '}
-    <FilterLink filter='SHOW_ALL'>
+    <FilterLink filter='SHOW_ALL' store={store}>
       All
     </FilterLink>
     {' '}
-    <FilterLink filter='SHOW_ACTIVE'>
+    <FilterLink filter='SHOW_ACTIVE' store={store}>
       Active
     </FilterLink>
     {' '}
-    <FilterLink filter='SHOW_COMPLETED'>
+    <FilterLink filter='SHOW_COMPLETED' store={store}>
       Completed
     </FilterLink>
   </p>
-);
-
-const TodoApp = () => (
-  <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
-  </div>
 );
 /*
  * END PRESENTATIONAL COMPONENTS
@@ -76,6 +68,7 @@ const TodoApp = () => (
  */
 class FilterLink extends Component {
   componentDidMount() {
+    const { store } = this.props;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -85,6 +78,7 @@ class FilterLink extends Component {
 
   render() {
     const props = this.props;
+    const { store } = props;
     const state = store.getState();
 
     return (
@@ -116,6 +110,7 @@ const getVisibleTodos = (todos, filter) => {
 
 class VisibleTodoList extends Component {
   componentDidMount() {
+    const { store } = this.props;
     this.unsubscribe = store.subscribe(() => this.forceUpdate());
   }
 
@@ -125,6 +120,7 @@ class VisibleTodoList extends Component {
 
   render() {
     const props = this.props;
+    const { store } = props;
     const state = store.getState();
 
     return (
@@ -140,6 +136,14 @@ class VisibleTodoList extends Component {
     );
   }
 }
+
+const TodoApp = ({ store }) => (
+  <div>
+    <AddTodo store={store} />
+    <VisibleTodoList store={store} />
+    <Footer store={store} />
+  </div>
+);
 /*
  * END CONTAINER COMPONENTS
  */
@@ -148,7 +152,7 @@ class VisibleTodoList extends Component {
  * COMPONENTS
  */
 let nextTodoId = 0;
-const AddTodo = () => {
+const AddTodo = ({ store }) => {
   let input;
 
   return (
