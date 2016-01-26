@@ -59,6 +59,14 @@ const Footer = () => (
     </FilterLink>
   </p>
 );
+
+const TodoApp = () => (
+  <div>
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+);
 /*
  * END PRESENTATIONAL COMPONENTS
  */
@@ -132,7 +140,14 @@ class VisibleTodoList extends Component {
     );
   }
 }
+/*
+ * END CONTAINER COMPONENTS
+ */
 
+/*
+ * COMPONENTS
+ */
+let nextTodoId = 0;
 const AddTodo = () => {
   let input;
 
@@ -152,17 +167,8 @@ const AddTodo = () => {
     </div>
   );
 };
-
-let nextTodoId = 0;
-const TodoApp = ({ todos, visibilityFilter }) => (
-  <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
-  </div>
-);
 /*
- * END CONTAINER COMPONENTS
+ * END COMPONENTS
  */
 
 export default TodoApp;
