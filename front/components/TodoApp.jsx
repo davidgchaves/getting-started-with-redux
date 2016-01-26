@@ -2,27 +2,11 @@ import React, { Component } from 'react';
 import { Provider }         from 'react-redux';
 
 import TodoList from './presentational/TodoList.jsx';
+import Link from './presentational/Link.jsx';
 
 /*
  * PRESENTATIONAL COMPONENTS
  */
-const Link = ({ active, children, onClick }) => {
-  const renderAsText = <span>{children}</span>;
-  const renderAsLink = (
-    <a
-      href='#'
-      onClick={e => {
-        e.preventDefault();
-        onClick();
-      }}
-    >
-      {children}
-    </a>
-  );
-
-  return active ? renderAsText : renderAsLink;
-};
-
 const Footer = () => (
   <p>
     Show:
