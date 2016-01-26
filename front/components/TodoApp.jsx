@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { Provider }         from 'react-redux';
 
+import Todo from './presentational/Todo.jsx';
+
 /*
  * PRESENTATIONAL COMPONENTS
  */
-const Todo = ({ onClick, completed, text }) => (
-  <li
-    onClick={onClick}
-    style={{textDecoration: completed ? 'line-through' : 'none'}}
-  >
-    {text}
-  </li>
-);
-
 const TodoList = ({ todos, onTodoClick }) => (
   <ul>
     {todos.map(todo =>
