@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import { Provider }         from 'react-redux';
 
-import Todo from './presentational/Todo.jsx';
+import TodoList from './presentational/TodoList.jsx';
 
 /*
  * PRESENTATIONAL COMPONENTS
  */
-const TodoList = ({ todos, onTodoClick }) => (
-  <ul>
-    {todos.map(todo =>
-       <Todo
-         key={todo.id}
-         {...todo}
-         onClick={() => onTodoClick(todo.id)}
-       />
-    )}
-  </ul>
-);
-
 const Link = ({ active, children, onClick }) => {
   const renderAsText = <span>{children}</span>;
   const renderAsLink = (
