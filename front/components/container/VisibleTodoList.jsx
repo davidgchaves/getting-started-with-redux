@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Provider }         from 'react-redux';
+import React       from 'react';
+import { connect } from 'react-redux';
 
 import TodoList from '../presentational/TodoList.jsx';
 
@@ -14,36 +14,52 @@ const getVisibleTodos = (todos, filter) => {
   }
 };
 
-class VisibleTodoList extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() => this.forceUpdate());
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-
-    return (
-      <TodoList
-        todos={getVisibleTodos(state.todos, state.visibilityFilter)}
-        onTodoClick={id =>
-          store.dispatch({
-            type: 'TOGGLE_TODO',
-            id
-          })
-        }
-      />
-    );
-  }
-}
-VisibleTodoList.contextTypes = {
-  store: React.PropTypes.object
+/*
+ * Returns the Props for the Presentational Component
+ * calculated from the 'state' of the Redux Store.
+ * These Props will be updated any time the 'state' changes.
+ */
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos(
+      state.todos,
+      state.visibilityFilter
+    )
+  };
 };
+
+/*
+ * Returns the callback Props needed for the Presentational Component,
+ * using the Redux Store's 'dispatch' method to dispatch actions.
+ * These Props will be updated any time the 'state' changes.
+*/
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick: (id) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      });
+    }
+  }
+};
+
+/*
+ * Create the VisibleTodoList Container Component from:
+ *   - mapStateToProps
+ *   - mapDispatchToProps
+ *   - TodoList
+ * (TodoList is the Presentational Component I want to connect to the Redux Store)
+ *
+ * Calculates the Props to pass to the Presentational Component (TodoList) by merging:
+ *   - the objects returned from
+ *     * mapStateToProps
+ *     * mapDispatchToProps
+ *   - its own (TodoList) Props
+ */
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
 
 export default VisibleTodoList;
